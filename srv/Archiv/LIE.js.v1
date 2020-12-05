@@ -1,0 +1,32 @@
+const sqlite3  = require('sqlite3').verbose();
+const express  = require('express');
+
+//the main application object
+const app      = express();
+
+// additional modules
+const theUsers = require('./modules/users.js');
+
+
+    // Server port
+    var HTTP_PORT = 8000 
+
+    // Start server
+    app.listen(HTTP_PORT, () => {
+        console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
+    });
+
+    // Root endpoint
+    app.get("/", (req, res, next) => {
+        res.json({"message":"Ok"});
+        console.log(theUsers.ListUsers());
+    });
+
+    // Insert here other API endpoints
+
+    // Default response for any other request
+    app.use(function(req, res){
+        res.status(404);
+    });
+
+
